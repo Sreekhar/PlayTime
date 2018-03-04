@@ -17,12 +17,13 @@ http.listen(port, () => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 let numUsers = 0;
+let userPositions = [];
 
 io.on('connection', function (socket) {
   var addedUser = false;
 
   // when the client emits 'new message', this listens and executes
-  socket.on('new message', function (data) {
+  socket.on('new message', (data) => {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: socket.username,
@@ -36,6 +37,12 @@ io.on('connection', function (socket) {
 
     // we store the username in the socket session for this client
     socket.username = username;
+    socket.id = numUsers;
+    let positions = {
+        positionX: 0,
+        positionY: 0
+    }
+    userPositions[numUsers] = positions;
     ++numUsers;
     addedUser = true;
     socket.emit('login', {
@@ -56,11 +63,23 @@ io.on('connection', function (socket) {
   });
 
   // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', function () {
+  socket.on('stop typing', () => {
     socket.broadcast.emit('stop typing', {
       username: socket.username
     });
   });
+
+  // Share positions
+  socket.on('share positions', (positionX, positionY) => {
+      let positions = {
+          positionX: positionX,
+          positionY: positionY
+      }
+      userPositions[socket.id] = positions;
+      socket.broadcast.emit('send positions', {
+         positionArray: userPositions
+      })
+  })
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function () {

@@ -51,6 +51,7 @@ $(() => {
 
   $(document).mousemove((e) => {
       $(".CopCursor").css({left:e.pageX, top:e.pageY});
+      socket.emit('share positions', e.pageX, e.pageY);
   });
 
   let socket = io();
@@ -78,7 +79,6 @@ $(() => {
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
 
-      $(".CopCursor").show();
       if(numUsers > 9) {
           numUsers = numUsers % 10;
       }
@@ -113,7 +113,7 @@ $(() => {
   }
 
   // Adds the visual chat message to the message list
-  function addChatMessage (data, options) {
+  let addChatMessage = (data, options) => {
     // Don't fade the message in if there is an 'X was typing'
     var $typingMessages = getTypingMessages(data);
     options = options || {};
@@ -276,6 +276,20 @@ $(() => {
   socket.on('new message', function (data) {
     addChatMessage(data);
   });
+
+  //Share positions
+  socket.on('send positions', (positions) => createCursors(positions))
+
+  let createCursors = positions => {
+      let gameElement = $('.game');
+      for(let iCount = 0; iCount < positions.length; iCount++) {
+          let d = document.createElement('img');
+          d.style.position = "absolute";
+          d.style.left = positions[iCount].positionX + 'px';
+          d.style.top = positions[iCount].positionY + 'px';
+          gameElement.append(d);
+      }
+  }
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
