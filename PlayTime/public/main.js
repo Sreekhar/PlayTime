@@ -273,17 +273,19 @@ $(() => {
     if(image_id > 9) {
         image_id = image_id % 10;
     }
-    let d = document.createElement('img');
-    let gameElement = $('.game');
-    d.setAttribute("src", "images/cops/cops-" + image_id + ".gif");
-    d.setAttribute("class", "CopCursor" + image_id);
-    gameElement.append(d);
-    $(".game").mouseover(() => {
-        $(".CopCursor" + image_id).show()
-    });
-    $('.chat').mouseover(() => {
-        $(".CopCursor" + image_id).hide()
-    });
+    for(let iCount = 0; iCount <= data.id; iCount++) {
+        let d = document.createElement('img');
+        let gameElement = $('.game');
+        d.setAttribute("src", "images/cops/cops-" + image_id + ".gif");
+        d.setAttribute("class", "CopCursor" + iCount);
+        gameElement.append(d);
+        $(".game").mouseover(() => {
+            $(".CopCursor" + iCount).show()
+        });
+        $('.chat').mouseover(() => {
+            $(".CopCursor" + iCount).hide()
+        });
+    }
     addParticipantsMessage(data);
   });
 
