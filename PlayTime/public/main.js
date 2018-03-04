@@ -22,6 +22,7 @@ $(() => {
   let typing = false;
   let lastTypingTime;
   let $currentInput = $usernameInput.focus();
+  let numUsers = 0;
 
   $(document).ready(() => {
       let usernameInput = document.getElementById('usernameInput');
@@ -49,13 +50,14 @@ $(() => {
   });
 
   $(document).mousemove((e) => {
-      $("#image").css({left:e.pageX, top:e.pageY});
+      $(".CopCursor").css({left:e.pageX, top:e.pageY});
   });
 
   let socket = io();
 
   let addParticipantsMessage = (data) => {
     var message = '';
+    numUsers = data.numUsers;
     if (data.numUsers === 1) {
       message += "there's 1 participant";
     } else {
@@ -75,6 +77,12 @@ $(() => {
       $chatPage.show();
       $loginPage.off('click');
       $currentInput = $inputMessage.focus();
+
+      $(".CopCursor").show();
+      if(numUsers > 9) {
+          numUsers = numUsers % 10;
+      }
+      $(".CopCursor").attr("src", "images/cops/cops-" + numUsers + ".gif");
 
       // Tell the server your username
       socket.emit('add user', username);
