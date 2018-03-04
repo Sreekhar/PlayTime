@@ -25,6 +25,7 @@ $(() => {
   let numUsers = 0;
 
   $(document).ready(() => {
+      let count = 0;
       let usernameInput = document.getElementById('usernameInput');
       usernameInput.onkeyup = () => {
           let inputLength = usernameInput.value.length;
@@ -49,16 +50,18 @@ $(() => {
 
       $('#Robber').hover(() => {
           let bodyWidth = document.body.clientWidth
+          count++;
           let bodyHeight = document.body.clientHeight;
 
-          let randPosX = Math.floor((Math.random() * bodyWidth)% 1000);
-          let randPosY = Math.floor((Math.random() * bodyHeight) % 1000);
+          let randPosX = Math.floor((Math.random() * bodyWidth) % 800);
+          let randPosY = Math.floor((Math.random() * bodyHeight) % 800);
 
           $('#Robber').css('marginLeft', randPosX);
           $('#Robber').css('marginTop', randPosY);
 
           $('.dimScreen').show();
           $(".ErrorMsgOuter").addClass("ErrorMsgOuterDiv");
+          $(".Score").html("<b>Your Score - " + count/2 + "</b>");
           $(".ErrorMsgOuter").show();
       });
 
@@ -285,12 +288,12 @@ $(() => {
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to catchcatch.com chat – ";
+    var message = "Welcome to catch the thief chat – ";
     log(message, {
       prepend: true
     });
 
-    for(let iCount = 0; iCount <= data.id; iCount++) {
+    for(let iCount = 0; iCount < data.id; iCount++) {
         image_id = iCount;
         if(image_id > 9) {
             image_id = image_id % 10;

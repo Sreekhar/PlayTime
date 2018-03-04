@@ -207,3 +207,7 @@ ul {
     border-radius: 15px;
     z-index: 150;
 }
+
+.Score {
+    text-align: center;
+}
