@@ -282,11 +282,16 @@ $(() => {
 
   let createCursors = positions => {
       let gameElement = $('.game');
-      for(let iCount = 0; iCount < positions.length; iCount++) {
+      for(let iCount = 0; iCount < positions.positionArray.length; iCount++) {
+          userCount = iCount;
+          if(userCount > 9) {
+              userCount = userCount % 10;
+          }
           let d = document.createElement('img');
+          d.setAttribute("src", "images/cops/cops-" + userCount + ".gif");
           d.style.position = "absolute";
-          d.style.left = positions[iCount].positionX + 'px';
-          d.style.top = positions[iCount].positionY + 'px';
+          d.style.left = positions.positionArray[iCount].positionX + 'px';
+          d.style.top = positions.positionArray[iCount].positionY + 'px';
           gameElement.append(d);
       }
   }
