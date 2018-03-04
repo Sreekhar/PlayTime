@@ -285,7 +285,7 @@ $(() => {
     }
     $('.chat').mouseover(() => {
         $(".CopCursor" + iCount).hide()
-    });    
+    });
     addParticipantsMessage(data);
   });
 
@@ -306,8 +306,8 @@ $(() => {
           $('.CopCursor' + userCount).css('position', 'absolute');
           $('.CopCursor' + userCount).css('left', positions.positionArray[iCount].positionX + 'px');
           $('.CopCursor' + userCount).css('top', positions.positionArray[iCount].positionY + 'px');
-          $('.CopCursor' + userCount).css('height', '75px');
-          $('.CopCursor' + userCount).css('width', '75px');
+          $('.CopCursor' + userCount).css('height', '100px');
+          $('.CopCursor' + userCount).css('width', '100px');
       }
   }
 
