@@ -97,10 +97,6 @@ $(() => {
     // if there is a non-empty message and a socket connection
     if (message && connected) {
       $inputMessage.val('');
-      addChatMessage({
-        username: username,
-        message: message
-      });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
     }
@@ -113,7 +109,7 @@ $(() => {
   }
 
   // Adds the visual chat message to the message list
-  let addChatMessage = (data, options) => {
+  function addChatMessage (data, options) {
     // Don't fade the message in if there is an 'X was typing'
     var $typingMessages = getTypingMessages(data);
     options = options || {};
@@ -183,7 +179,10 @@ $(() => {
   }
 
   // Prevents input from having injected markup
-  let cleanInput = (input) => $('<div/>').text(input).html();
+  // Prevents input from having injected markup
+  function cleanInput (input) {
+    return $('<div/>').text(input).html();
+  }
 
   // Updates the typing event
   function updateTyping () {
@@ -283,10 +282,10 @@ $(() => {
         $(".game").mouseover(() => {
             $(".CopCursor" + iCount).show()
         });
-        $('.chat').mouseover(() => {
-            $(".CopCursor" + iCount).hide()
-        });
     }
+    $('.chat').mouseover(() => {
+        $(".CopCursor" + iCount).hide()
+    });    
     addParticipantsMessage(data);
   });
 
