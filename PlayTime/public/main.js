@@ -293,7 +293,7 @@ $(() => {
       prepend: true
     });
 
-    for(let iCount = 0; iCount < data.id; iCount++) {
+    for(let iCount = 0; iCount <= data.id; iCount++) {
         image_id = iCount;
         if(image_id > 9) {
             image_id = image_id % 10;
