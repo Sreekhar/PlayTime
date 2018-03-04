@@ -269,6 +269,21 @@ $(() => {
     log(message, {
       prepend: true
     });
+    image_id = data.id;
+    if(image_id > 9) {
+        image_id = image_id % 10;
+    }
+    let d = document.createElement('img');
+    let gameElement = $('.game');
+    d.setAttribute("src", "images/cops/cops-" + image_id + ".gif");
+    d.setAttribute("class", "CopCursor" + image_id);
+    gameElement.append(d);
+    $(".game").mouseover(() => {
+        $(".CopCursor" + image_id).show()
+    });
+    $('.chat').mouseover(() => {
+        $(".CopCursor" + image_id).hide()
+    });
     addParticipantsMessage(data);
   });
 
@@ -281,18 +296,16 @@ $(() => {
   socket.on('send positions', (positions) => createCursors(positions))
 
   let createCursors = positions => {
-      let gameElement = $('.game');
       for(let iCount = 0; iCount < positions.positionArray.length; iCount++) {
           userCount = iCount;
           if(userCount > 9) {
               userCount = userCount % 10;
           }
-          let d = document.createElement('img');
-          d.setAttribute("src", "images/cops/cops-" + userCount + ".gif");
-          d.style.position = "absolute";
-          d.style.left = positions.positionArray[iCount].positionX + 'px';
-          d.style.top = positions.positionArray[iCount].positionY + 'px';
-          gameElement.append(d);
+          $('.CopCursor' + userCount).css('position', 'absolute');
+          $('.CopCursor' + userCount).css('left', positions.positionArray[iCount].positionX + 'px');
+          $('.CopCursor' + userCount).css('top', positions.positionArray[iCount].positionY + 'px');
+          $('.CopCursor' + userCount).css('height', '75px');
+          $('.CopCursor' + userCount).css('width', '75px');
       }
   }
 

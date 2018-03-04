@@ -6,10 +6,9 @@
   </head>
   <body>
     <div class="pages DisplayInline">
-      <div class="game" onmouseover="showCop(event)">
-          <img class="CopCursor"></img>
+      <div class="game">
       </div>
-      <div class="chat page" onmouseover="hideCop(event)">
+      <div class="chat page">
         <div class="chatArea">
           <div class="messages"></div>
           <input class="inputMessage" placeholder="Type here..."/>
@@ -25,15 +24,6 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script>
-    let showCop = (event) => {
-          $(".CopCursor").show();
-    }
-
-    let hideCop = (event) => {
-          $(".CopCursor").hide();
-    }
-    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
   </body>
