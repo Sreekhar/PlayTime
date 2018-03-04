@@ -47,6 +47,27 @@ $(() => {
           }
       }
 
+      $('#Robber').hover(() => {
+          let bodyWidth = document.body.clientWidth
+          let bodyHeight = document.body.clientHeight;
+
+          let randPosX = Math.floor((Math.random() * bodyWidth)% 1000);
+          let randPosY = Math.floor((Math.random() * bodyHeight) % 1000);
+
+          $('#Robber').css('marginLeft', randPosX);
+          $('#Robber').css('marginTop', randPosY);
+
+          $('.dimScreen').show();
+          $(".ErrorMsgOuter").addClass("ErrorMsgOuterDiv");
+          $(".ErrorMsgOuter").show();
+      });
+
+      $('.dimScreen').click(() => {
+          $('.dimScreen').hide();
+          $(".ErrorMsgOuter").removeClass("ErrorMsgOuterDiv");
+          $(".ErrorMsgOuter").hide();
+      })
+
   });
 
   $(document).mousemove((e) => {
@@ -284,7 +305,7 @@ $(() => {
         });
     }
     $('.chat').mouseover(() => {
-        $(".CopCursor" + iCount).hide()
+        $(".CopCursor" + data.id).hide()
     });
     addParticipantsMessage(data);
   });
@@ -306,8 +327,8 @@ $(() => {
           $('.CopCursor' + userCount).css('position', 'absolute');
           $('.CopCursor' + userCount).css('left', positions.positionArray[iCount].positionX + 'px');
           $('.CopCursor' + userCount).css('top', positions.positionArray[iCount].positionY + 'px');
-          $('.CopCursor' + userCount).css('height', '100px');
-          $('.CopCursor' + userCount).css('width', '100px');
+          $('.CopCursor' + userCount).css('height', '150px');
+          $('.CopCursor' + userCount).css('width', '150px');
       }
   }
 

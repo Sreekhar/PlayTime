@@ -167,3 +167,43 @@ ul {
 	-ms-flex-direction: row;
 	flex-direction: row;
 }
+
+#Robber {
+    width: 150px;
+    height: 150px;
+}
+
+#funny {
+    width: 500px;
+    height: 500px;
+}
+
+.dimScreen {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: #A9A9A9;
+    z-index: 10;
+    opacity: 0.4;
+    cursor: pointer;
+    left: 0px;
+}
+
+.ErrorMsgOuterDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    margin-left: -250px;
+    margin-top: -250px;
+    width: 500px;
+    max-height: 500px;
+    background: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 15px;
+    z-index: 150;
+}
