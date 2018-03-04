@@ -269,11 +269,12 @@ $(() => {
     log(message, {
       prepend: true
     });
-    image_id = data.id;
-    if(image_id > 9) {
-        image_id = image_id % 10;
-    }
+
     for(let iCount = 0; iCount <= data.id; iCount++) {
+        image_id = iCount;
+        if(image_id > 9) {
+            image_id = image_id % 10;
+        }
         let d = document.createElement('img');
         let gameElement = $('.game');
         d.setAttribute("src", "images/cops/cops-" + image_id + ".gif");
@@ -314,6 +315,21 @@ $(() => {
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
+    image_id = data.id;
+    if(image_id > 9) {
+        image_id = image_id % 10;
+    }
+    let d = document.createElement('img');
+    let gameElement = $('.game');
+    d.setAttribute("src", "images/cops/cops-" + image_id + ".gif");
+    d.setAttribute("class", "CopCursor" + data.id);
+    gameElement.append(d);
+    $(".game").mouseover(() => {
+        $(".CopCursor" + data.id).show()
+    });
+    $('.chat').mouseover(() => {
+        $(".CopCursor" + data.id).hide()
+    });
     addParticipantsMessage(data);
   });
 
