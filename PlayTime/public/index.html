@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Play Time</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="pages DisplayInline">
+      <div class="game"></div>
+      <div class="chat page">
+        <div class="chatArea">
+          <div class="messages"></div>
+          <input class="inputMessage" placeholder="Type here..."/>
+        </div>
+      </div>
+      <div class="login page">
+        <img src="images/GrootQuestionMark.gif" style="margin-right: 3%;float: right;"></img>
+        <div class="form">
+          <h3 class="title">What's your nickname?</h3>
+          <input class="usernameInput" id="usernameInput" type="text" maxlength="14" />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>
